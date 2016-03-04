@@ -28,6 +28,7 @@ var stream = T.stream("statuses/filter", { track: '@palettepal' });
 stream.on('tweet', function(tweet) {
   var source_tweet = tweet.id_str;
   var username = "@" + tweet.user.screen_name;
+  if (!tweet.entities.media) { tweet.entities.media = []; }
 
   var photo_url = tweet.entities.media.reduce(function(acc, val) {
     if (acc) { return acc; }
@@ -51,6 +52,8 @@ stream.on('tweet', function(tweet) {
         var filename = "images/" + username + "_" + Date.now();
         fs.writeFile(filename, data, 'binary', function(err) {
           var palette = colorThief.getPalette(__dirname + "/" + filename, 5);
+          fs.unlink(filename);
+
           var output = fs.createWriteStream(__dirname + "/" + filename + "_out.png");
 
           var canvas = new Canvas(500, 100);
@@ -86,13 +89,11 @@ stream.on('tweet', function(tweet) {
       T.post('media/upload', {media_data: b64}, function(err, data, response) {
         if (err) { return console.error("Error uploading media", err); }
         var mediaIdStr = data.media_id_string;
+        fs.unlink(filename + "_out.png");
 
         T.post('statuses/update', {in_reply_to_status_id: source_tweet, status: username, media_ids: [mediaIdStr]}, function(err, data, response) {
           if (err) { console.error(err); }
           else {console.log("[" + username + "] - replied successfully.")};
-
-          fs.unlink(filename);
-          fs.unlink(filename + "_out.png");
         });
       })
     }
@@ -103,7 +104,15 @@ stream.on('tweet', function(tweet) {
 
     req.end();
   } else {
-    console.log("User " + username + " isn't helping me.");
+
+    if (tweet.in_reply_to_status_id) {
+      // this is reply to a tweet I've already sent, ignore it - we don't want a conversation.
+    } else {
+      T.post('statuses/update', {in_reply_to_status_id: source_tweet, status: "Please send me a tweet with a photo attached as twitter media to get a palette."}, function(err, data, response) {
+        if (err) { console.error(err); }
+        else {console.log("[" + username + "] has received remedial instructions.")};
+      });
+    }
   }
 });
 

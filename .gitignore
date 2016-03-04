@@ -3,3 +3,7 @@ npm-debug.log
 images/*
 !images/.gitkeep
 .DS_Store
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
