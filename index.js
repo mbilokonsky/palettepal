@@ -108,7 +108,7 @@ stream.on('tweet', function(tweet) {
     if (tweet.in_reply_to_status_id) {
       // this is reply to a tweet I've already sent, ignore it - we don't want a conversation.
     } else {
-      T.post('statuses/update', {in_reply_to_status_id: source_tweet, status: "Please send me a tweet with a photo attached as twitter media to get a palette."}, function(err, data, response) {
+      T.post('statuses/update', {in_reply_to_status_id: source_tweet, status: username + " please send me a tweet with a photo attached as twitter media to get a palette."}, function(err, data, response) {
         if (err) { console.error(err); }
         else {console.log("[" + username + "] has received remedial instructions.")};
       });
