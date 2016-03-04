@@ -63,9 +63,9 @@ stream.on('tweet', function(tweet) {
             ctx.fillStyle = 'rgb(' + color[0] + "," + color[1] + "," + color[2] +")";
             ctx.fillRect(index * 100, 0, 100, 100);
 
-            ctx.font = "20px Impact";
+            ctx.font = "15px Impact";
             ctx.fillStyle = "rgb(255, 255, 255)";
-            ctx.fillText("#" + color[0].toString(16) + color[1].toString(16) + color[2].toString(16), (index * 100) + 10, 85);
+            ctx.fillText("#" + color[0].toString(16) + color[1].toString(16) + color[2].toString(16), (index * 100) + 5, 95);
           })
 
           var stream = canvas.pngStream();

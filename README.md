@@ -9,4 +9,4 @@ One complication is that color-thief relies on canvas-node, which itself has som
   2) Install all of the dependencies that canvas-node recommends here (https://github.com/Automattic/node-canvas):
     `sudo yum install cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel giflib-devel`
   3) edit .bashrc on the remote server to export the following environment variable:
-    `
+    `export PKG_CONFIG_PATH="/usr/lib64/pkgconfig/cairo.pc"`
