@@ -1,0 +1,23 @@
+{
+  "name": "palettepal",
+  "version": "1.0.0",
+  "description": "A twitter bot for generating color palettes from search terms.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "botacademy",
+    "bot",
+    "twitter",
+    "color"
+  ],
+  "author": "@mykola",
+  "license": "ISC",
+  "dependencies": {
+    "color-thief": "^2.2.1",
+    "request": "^2.69.0",
+    "twit": "^2.2.2"
+  }
+}
