@@ -3,10 +3,4 @@ Tweet him and image and he'll reply with a palette of color data inspired by you
 
 This uses a javascript tool called `color-thief` under the hood, which you can find here: http://lokeshdhakar.com/projects/color-thief/
 
-One complication is that color-thief relies on canvas-node, which itself has some pretty funky dependencies. I'm still trying to figure out how to make this run on elastic beanstalk in a sane way. I had to do the following so far:
-
-  1) SSH into the EB instance: `eb ssh`
-  2) Install all of the dependencies that canvas-node recommends here (https://github.com/Automattic/node-canvas):
-    `sudo yum install cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel giflib-devel`
-  3) edit .bashrc on the remote server to export the following environment variable:
-    `export PKG_CONFIG_PATH="/usr/lib64/pkgconfig/cairo.pc"`
+So, this is a bit confusing. Using Docker for the first time. I can't 'just' upload the dockerfile because I need the context in which it runs, as a zip file. So to deploy this to EB, I zipped the folder content into an archive file and uploaded that. I also set the envars in elastic beanstalk (I assume those'll get pushed through?)
