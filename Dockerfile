@@ -10,5 +10,5 @@ RUN npm install
 COPY . /usr/src/app
 
 RUN ls -la /usr/src/app
-
+EXPOSE 8888
 CMD ["npm", "start"]
