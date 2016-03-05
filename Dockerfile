@@ -5,10 +5,8 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app
-RUN rm -rf /usr/src/node_modules
 RUN npm install
 COPY . /usr/src/app
 
-RUN ls -la /usr/src/app
 EXPOSE 8888
 CMD ["npm", "start"]
