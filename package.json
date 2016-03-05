@@ -4,6 +4,7 @@
   "description": "A twitter bot for generating color palettes from search terms.",
   "main": "index.js",
   "scripts": {
+    "preinstall": "sudo apt-get update && sudo apt-get install -y libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
